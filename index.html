@@ -7,10 +7,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock, Paper & Scissors</title>
 
-  <script defer src="script.js"></script>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fontawesome Icon -->
+  <script src="https://kit.fontawesome.com/bb2142d1c3.js" crossorigin="anonymous"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Main Script -->
+  <script defer src="js/script.js"></script>
 </head>
 
 <body>
+
+  <section class="section--start">
+    <form class="form--round">
+      <label for="round" class="paragraph paragraph--lg form--round__label">Enter the nmber of rounds</label>
+      <input type="number" class="form--round__input">
+    </form>
+
+    <button class="btn btn--x-lg btn--start">
+      Start
+    </button>
+  </section>
+
+  <main class="main">
+    <section class="section--computer">
+      <img src="img/scissors-choice.svg" alt="choice" class="computer__choice">
+      <div class="computer__score">
+        <p class="paragraph paragraph--md computer__score__win">
+          Wins
+          <span class="computer__score__win__amount">4</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section--judge">
+      <div class="section--judge--in-game">
+        <p class="paragraph paragraph--lg">
+          Round
+          <span class="round__number__current">7</span>
+          of
+          <span class="round__number__max">15</span>
+        </p>
+        <p class="paragraph paragraph--lg round__winner__text">You win!</p>
+        <p class="paragraph paragraph--md round__winner__desc">
+          <span class="round__winner--choice">Scissors</span>
+          beats
+          <span class="round__winner--choice">Paper</span>
+          !
+        </p>
+      </div>
+
+      <div class="section--judge--final">
+        <p class="paragraph paragraph--lg">You lost this game!</p>
+        <p class="paragraph paragraph--md">Play again?</p>
+        <i class="fa-solid fa-rotate-left icon icon--replay"></i>
+      </div>
+    </section>
+
+    <section class="section--player">
+      <img src="img/rock-choice.svg" alt="choice" class="player__choice">
+      <div class="player__score">
+        <p class="paragraph paragraph--md player__score__win">
+          Wins
+          <span class="player__score__win__amount">4</span>
+        </p>
+      </div>
+    </section>
+
+    <div class="choices__wrapper">
+      <img src="img/rock-icon.png" alt="rock" class="choices__img">
+      <img src="img/paper-icon.png" alt="paper" class="choices__img">
+      <img src="img/scissors-icon.png" alt="scissors" class="choices__img">
+    </div>
+  </main>
 
 </body>
 
