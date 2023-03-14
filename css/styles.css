@@ -1,0 +1,251 @@
+:root {
+  --color-primary: #5dffc8;
+  --color-secondary: #ff5d5d;
+  --color-white: #fff;
+  --main-body-padding: 2em;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Caveat", cursive;
+  line-height: 1.4;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: url("../img/bg-small.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+input,
+label,
+button {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+main,
+.section--start {
+  padding: var(--main-body-padding);
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.paragraph {
+  font-size: 1.5rem;
+  display: inline-block;
+  color: var(--color-white);
+}
+
+.paragraph--lg {
+  font-size: 3rem;
+}
+
+.paragraph--md {
+  font-size: 2.5rem;
+}
+
+/* Buttons */
+.btn,
+.btn:link,
+.btn:visited {
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn--round {
+  border-radius: 50%;
+}
+
+.btn--choices__option {
+  width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+}
+
+.btn--choices__option:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--choices__option:active,
+.btn--choices__option:focus {
+  transform: translateY(-0.5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--start {
+  width: 13rem;
+  height: 13rem;
+  font-size: 3.5rem;
+  font-weight: 700;
+  border-radius: 50%;
+  border: 7px solid var(--color-primary);
+  background-color: transparent;
+  color: var(--color-white);
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: 5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--start:hover {
+  box-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Section Start */
+
+.section--start {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form--round {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+  align-items: center;
+}
+
+.form--round__input {
+  max-width: 9rem;
+  height: 5rem;
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 0.3em;
+  color: var(--color-white);
+  background-color: transparent;
+  border: 3px solid var(--color-white);
+}
+
+.form--round__input:focus {
+  outline: none !important;
+  border-color: var(--color-primary);
+}
+
+/* Choice Image */
+
+.choice__img {
+  width: 10rem;
+}
+
+/* Section -- In-Game Player (Both Computer & Player) */
+
+.section--in-game-player {
+  display: flex;
+  position: relative;
+}
+
+/* Section -- Computer Choice */
+
+.computer__choice__img {
+  margin: 0 auto;
+  margin-top: calc(var(--main-body-padding) * -1);
+  filter: invert(51%) sepia(46%) saturate(3026%) hue-rotate(326deg) brightness(102%) contrast(105%);
+
+  transform: rotate(180deg);
+}
+
+.computer__score {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.computer__score > * {
+  color: var(--color-secondary);
+}
+
+/* Section -- Player  */
+
+.player__choice__img {
+  margin: 0 auto;
+  margin-bottom: calc(var(--main-body-padding) * -1);
+  filter: invert(79%) sepia(100%) saturate(288%) hue-rotate(83deg) brightness(100%) contrast(102%);
+}
+
+.player__score {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.player__score > * {
+  color: var(--color-primary);
+}
+
+/* Section -- Judge */
+
+.section--judge {
+  margin: auto 0;
+}
+
+.section--judge--in-game,
+.section--judge--final {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Section -- Judge -- In-Game */
+
+.section--judge--in-game {
+  width: 100%;
+}
+
+/* Section -- Judge -- Final */
+
+.section--judge--final {
+  width: 100%;
+}
+
+.icon--replay {
+  font-size: 3.5rem;
+  color: var(--color-white);
+  margin-top: 0.5em;
+}
+
+/* Choices Options */
+
+.choices__option__wrapper {
+  position: absolute;
+  bottom: var(--main-body-padding);
+  right: var(--main-body-padding);
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5em;
+}
+
+.choices__option__img {
+  width: 4.5rem;
+}

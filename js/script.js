@@ -77,4 +77,4 @@ const game = roundsNum => {
   else console.log(`Player Score: ${player.score}, Computer Score: ${computer.score} - DRAW!!!`);
 };
 
-game(3);
+// game(3);

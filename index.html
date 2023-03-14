@@ -36,12 +36,16 @@
   </section>
 
   <main class="main">
-    <section class="section--computer">
-      <img src="img/scissors-choice.svg" alt="choice" class="computer__choice">
+    <section class="section--in-game-player section--computer">
+      <img src="img/scissors-choice.svg" alt="choice" class="computer__choice__img choice__img">
       <div class="computer__score">
         <p class="paragraph paragraph--md computer__score__win">
-          Wins
+          Wins:
           <span class="computer__score__win__amount">4</span>
+        </p>
+        <p class="paragraph paragraph--md computer__score__draw">
+          Draws:
+          <span class="computer__score__draw__amount">5</span>
         </p>
       </div>
     </section>
@@ -70,20 +74,30 @@
       </div>
     </section>
 
-    <section class="section--player">
-      <img src="img/rock-choice.svg" alt="choice" class="player__choice">
+    <section class="section--in-game-player section--player">
+      <img src="img/rock-choice.svg" alt="choice" class="player__choice__img choice__img">
       <div class="player__score">
         <p class="paragraph paragraph--md player__score__win">
           Wins
           <span class="player__score__win__amount">4</span>
         </p>
+        <p class="paragraph paragraph--md player__score__draw">
+          Draws:
+          <span class="player__score__draw__amount">5</span>
+        </p>
       </div>
     </section>
 
-    <div class="choices__wrapper">
-      <img src="img/rock-icon.png" alt="rock" class="choices__img">
-      <img src="img/paper-icon.png" alt="paper" class="choices__img">
-      <img src="img/scissors-icon.png" alt="scissors" class="choices__img">
+    <div class="choices__option__wrapper">
+      <button class="btn btn--round btn--choices__option">
+        <img src="img/rock-icon.png" alt="rock" class="choices__option__img">
+      </button>
+      <button class="btn btn--round btn--choices__option">
+        <img src="img/paper-icon.png" alt="paper" class="choices__option__img">
+      </button>
+      <button class="btn btn--round btn--choices__option">
+        <img src="img/scissors-icon.png" alt="scissors" class="choices__option__img">
+      </button>
     </div>
   </main>
 
