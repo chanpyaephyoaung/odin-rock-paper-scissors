@@ -24,7 +24,7 @@
 
 <body>
 
-  <section class="section--start">
+  <!-- <section class="section--start">
     <form class="form--round">
       <label for="round" class="paragraph paragraph--lg form--round__label">Enter the nmber of rounds</label>
       <input type="number" class="form--round__input">
@@ -33,7 +33,7 @@
     <button class="btn btn--x-lg btn--start">
       Start
     </button>
-  </section>
+  </section> -->
 
   <main class="main">
     <section class="section--in-game-player section--computer">
@@ -52,26 +52,28 @@
 
     <section class="section--judge">
       <div class="section--judge--in-game">
-        <p class="paragraph paragraph--lg">
+        <p class="paragraph paragraph--lg round__number">
           Round
           <span class="round__number__current">7</span>
           of
           <span class="round__number__max">15</span>
         </p>
-        <p class="paragraph paragraph--lg round__winner__text">You win!</p>
-        <p class="paragraph paragraph--md round__winner__desc">
-          <span class="round__winner--choice">Scissors</span>
-          beats
-          <span class="round__winner--choice">Paper</span>
-          !
-        </p>
+        <div class="round__decision">
+          <p class="paragraph paragraph--lg round__winner__text">You win!</p>
+          <p class="paragraph paragraph--md round__winner__desc">
+            <span class="round__winner--choice">Scissors</span>
+            beats
+            <span class="round__winner--choice">Paper</span>
+            !
+          </p>
+        </div>
       </div>
 
-      <div class="section--judge--final">
+      <!-- <div class="section--judge--final">
         <p class="paragraph paragraph--lg">You lost this game!</p>
         <p class="paragraph paragraph--md">Play again?</p>
         <i class="fa-solid fa-rotate-left icon icon--replay"></i>
-      </div>
+      </div> -->
     </section>
 
     <section class="section--in-game-player section--player">

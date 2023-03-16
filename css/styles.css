@@ -2,7 +2,7 @@
   --color-primary: #5dffc8;
   --color-secondary: #ff5d5d;
   --color-white: #fff;
-  --main-body-padding: 2em;
+  --main-body-padding: 2rem;
 }
 
 *,
@@ -26,6 +26,28 @@ body {
   background-image: url("../img/bg-small.jpg");
   background-position: center;
   background-size: cover;
+}
+
+@media (min-width: 650px) {
+  :root {
+    --main-body-padding: 3.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  html {
+    font-size: 75%;
+  }
+
+  body {
+    background-image: url("../img/bg-large.jpg");
+  }
+}
+
+@media (min-width: 950px) {
+  :root {
+    --main-body-padding: 3rem;
+  }
 }
 
 input,
@@ -60,6 +82,22 @@ main,
   font-size: 2.5rem;
 }
 
+@media (min-width: 900px) {
+  .paragraph-lg {
+    font-size: 3.5rem;
+  }
+
+  .paragraph--md {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 950px) {
+  .main {
+    flex-direction: row;
+  }
+}
+
 /* Buttons */
 .btn,
 .btn:link,
@@ -73,23 +111,6 @@ main,
 
 .btn--round {
   border-radius: 50%;
-}
-
-.btn--choices__option {
-  width: 4.5rem;
-  height: 4.5rem;
-  overflow: hidden;
-}
-
-.btn--choices__option:hover {
-  transform: translateY(-1.5px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
-
-.btn--choices__option:active,
-.btn--choices__option:focus {
-  transform: translateY(-0.5px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .btn--start {
@@ -114,6 +135,13 @@ main,
   box-shadow: 0 0 10px var(--color-primary);
 }
 
+@media (min-width: 900px) {
+  .btn--start {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 /* Section Start */
 
 .section--start {
@@ -123,12 +151,27 @@ main,
   flex-direction: column;
 }
 
+@media (min-width: 900px) {
+  .section--start {
+    flex-direction: row;
+    column-gap: 5em;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .form--round {
   margin-top: auto;
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
   align-items: center;
+}
+
+@media (min-width: 900px) {
+  .form--round {
+    margin-top: 0;
+  }
 }
 
 .form--round__input {
@@ -160,6 +203,22 @@ main,
   position: relative;
 }
 
+@media (min-width: 950px) {
+  .choice__img {
+    width: 13rem;
+  }
+
+  .section--in-game-player {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1300px) {
+  .choice__img {
+    width: 15rem;
+  }
+}
+
 /* Section -- Computer Choice */
 
 .computer__choice__img {
@@ -182,6 +241,17 @@ main,
   color: var(--color-secondary);
 }
 
+@media (min-width: 950px) {
+  .computer__choice__img {
+    margin: auto 0;
+    transform: rotate(90deg) scaleX(-1);
+  }
+
+  .computer__score {
+    left: 0;
+  }
+}
+
 /* Section -- Player  */
 
 .player__choice__img {
@@ -200,6 +270,19 @@ main,
 
 .player__score > * {
   color: var(--color-primary);
+}
+
+@media (min-width: 950px) {
+  .player__choice__img {
+    margin: auto 0;
+    transform: rotate(270deg) scaleX(-1);
+  }
+
+  .player__score {
+    top: 0;
+    left: auto;
+    right: 0;
+  }
 }
 
 /* Section -- Judge */
@@ -222,16 +305,39 @@ main,
   width: 100%;
 }
 
+.round__decision {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 950px) {
+  .round__number {
+    position: absolute;
+    top: var(--main-body-padding);
+  }
+}
+
 /* Section -- Judge -- Final */
 
 .section--judge--final {
   width: 100%;
 }
 
+.icon {
+  cursor: pointer;
+}
+
 .icon--replay {
   font-size: 3.5rem;
   color: var(--color-white);
   margin-top: 0.5em;
+}
+
+@media (min-width: 950px) {
+  .section--judge {
+    margin: auto;
+  }
 }
 
 /* Choices Options */
@@ -246,6 +352,48 @@ main,
   row-gap: 1.5em;
 }
 
+.btn--choices__option,
 .choices__option__img {
   width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+}
+
+.btn--choices__option {
+  transition: all 0.3s;
+}
+
+.btn--choices__option:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--choices__option:active {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 650px) {
+  .btn--choices__option,
+  .choices__option__img {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+@media (min-width: 950px) {
+  .choices__option__wrapper {
+    right: 50%;
+    transform: translate(50%);
+
+    flex-direction: row;
+    row-gap: 0;
+    column-gap: 2.5em;
+  }
+
+  .btn--choices__option,
+  .choices__option__img {
+    width: 8rem;
+    height: 8rem;
+  }
 }
