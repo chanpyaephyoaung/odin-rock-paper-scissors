@@ -2,7 +2,7 @@
 
 // Selecting DOM Elements
 
-// Section -- Start
+// Start -- Section
 const sectionStart = document.querySelector(".section--start");
 const formRound = document.querySelector(".form--round");
 const formRoundInput = document.querySelector(".form--round__input");
@@ -42,6 +42,11 @@ const roundDecisionVerbText = document.querySelector(".round__decision__verb");
 const roundDecisionWinnerText = document.querySelector(".round__winner__text");
 const roundDecisionWinnerChoiceText = document.querySelector(".round__winner--choice");
 const roundDecisionLoserChoiceText = document.querySelector(".round__loser--choice");
+
+// Judge -- Final
+const sectionJudgeFinal = document.querySelector(".section--judge--final");
+const gameWinnerText = document.querySelector(".game__winner__text");
+const gameResetBtn = document.querySelector(".game__reset__btn");
 
 class App {
   choices = [
@@ -86,6 +91,7 @@ class App {
   constructor() {
     formRound.addEventListener("submit", this._startGame.bind(this));
     choicesWrapper.addEventListener("click", this._playRound.bind(this));
+    gameResetBtn.addEventListener("click", this._resetGame.bind(this));
   }
 
   // Get random number
@@ -101,6 +107,16 @@ class App {
   // Capitalize first letter of the word
   _capitalizeWord(word) {
     return word.replace(word[0], word[0].toUpperCase());
+  }
+
+  // Hide Elements
+  _hideElements(...els) {
+    els.forEach(el => el.classList.add("hide"));
+  }
+
+  // Show Elements
+  _showElements(...els) {
+    els.forEach(el => el.classList.remove("hide"));
   }
 
   // Round Input Validation
@@ -125,13 +141,17 @@ class App {
     e.preventDefault();
     // Retrieve the input value for the number of round
     this.roundAmount.totalRound = formRoundInput.value;
+    // Clear Input
+    formRoundInput.value = "";
     // Validate input
     this._validateRoundInput(+this.roundAmount.totalRound);
     if (this.hasRoundInputError) return;
 
     this._zoomOut(sectionStart, 400, formRoundControls, btnStart);
-    gameContainer.classList.remove("hide");
-    sectionJudgeInGame.classList.remove("hide");
+    this._showElements(gameContainer, sectionJudgeInGame);
+
+    playerChoiceImg.style.animation = "playerChoiceStart 0.2s 0.4s ease-in";
+    computerChoiceImg.style.animation = "computerChoiceStart 0.2s 0.4s ease-in";
 
     roundText.style.animation = "zoomIn 0.3s ease-in";
     totalRoundNumText.textContent = this.roundAmount.totalRound;
@@ -142,7 +162,14 @@ class App {
     elArr.forEach(el => (el.style.animation = "zoomOut 0.3s ease-in forwards"));
     setTimeout(() => {
       tohideContainer.classList.add("hide");
+      elArr.forEach(el => (el.style.animation = ""));
     }, hideTime);
+  }
+
+  // Zoom In animation for the list of elements
+  _zoomIn(toshowContainer, ...elArr) {
+    toshowContainer.classList.remove("hide");
+    elArr.forEach(el => (el.style.animation = "zoomIn 0.3s ease-in forwards"));
   }
 
   // Animation for choices' initiation
@@ -161,6 +188,7 @@ class App {
       const chosenWeapon = e.target.closest(".btn--choices__option");
       if (!chosenWeapon) return;
       this.isWeaponChosen = true;
+      // Disable weapon buttons
       btnChoices.forEach(btn => (btn.disabled = true));
       console.log(chosenWeapon);
       return chosenWeapon.dataset.choice;
@@ -168,10 +196,10 @@ class App {
   }
 
   // Change the weapon choice
-  _changeWeapon(choice, player) {
+  _changeWeapon(choice, player, time) {
     setTimeout(() => {
       player.src = `img/${choice}-choice.svg`;
-    }, 1600);
+    }, time);
   }
 
   // Update the scores of both computer and player
@@ -190,9 +218,11 @@ class App {
       roundDecisionWinnerText.textContent = "Draw!";
       roundDecisionVerbText.textContent = "🤝";
     } else if (winner === "computer") {
+      roundDecisionWinnerText.style.color = "var(--color-secondary)";
       roundDecisionWinnerText.textContent = "You lose!";
       roundDecisionVerbText.textContent = "beats";
     } else if (winner === "player") {
+      roundDecisionWinnerText.style.color = "var(--color-primary)";
       roundDecisionWinnerText.textContent = "You win!";
       roundDecisionVerbText.textContent = "beats";
     }
@@ -201,7 +231,7 @@ class App {
   }
 
   // Decide winner based on choices
-  _decideWinner() {
+  _decideRoundWinner() {
     setTimeout(() => {
       const computerChoice = this.choices.find(
         choice => choice.name === this.computer.currentChoice
@@ -234,7 +264,24 @@ class App {
         console.log("draw!");
       }
       this._updateScores();
-    }, 1800);
+    }, 2000);
+  }
+
+  _resetRound() {
+    if (this.roundAmount.currentRound < this.roundAmount.totalRound) {
+      setTimeout(() => {
+        roundDecisionText.classList.add("hide");
+        this._changeWeapon("rock", playerChoiceImg, 0);
+        this._changeWeapon("rock", computerChoiceImg, 0);
+        // Enable weapon buttons
+        btnChoices.forEach(btn => (btn.disabled = false));
+        // Reset round
+        this.isWeaponChosen = false;
+        currentRoundText.textContent = ++this.roundAmount.currentRound;
+        computerChoiceImg.style.animation = "";
+        playerChoiceImg.style.animation = "";
+      }, 4000);
+    }
   }
 
   // Play a round of rps
@@ -245,15 +292,16 @@ class App {
     this._animatePlayersInitiation();
 
     // Change player weapon
-    this._changeWeapon(this.player.currentChoice, playerChoiceImg);
+    this._changeWeapon(this.player.currentChoice, playerChoiceImg, 1600);
 
     // Change computer weapon
     this.computer.currentChoice = this._getComputerChoice();
-    this._changeWeapon(this.computer.currentChoice, computerChoiceImg);
+    this._changeWeapon(this.computer.currentChoice, computerChoiceImg, 1600);
 
     console.log(this.computer, this.player);
     // console.log(this.player);
-    this._decideWinner();
+    this._decideRoundWinner();
+    this._resetRound();
   }
 }
 
