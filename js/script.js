@@ -161,6 +161,8 @@ class App {
       const chosenWeapon = e.target.closest(".btn--choices__option");
       if (!chosenWeapon) return;
       this.isWeaponChosen = true;
+      btnChoices.forEach(btn => (btn.disabled = true));
+      console.log(chosenWeapon);
       return chosenWeapon.dataset.choice;
     }
   }

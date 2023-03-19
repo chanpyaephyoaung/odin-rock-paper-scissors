@@ -418,14 +418,18 @@ main,
   transition: all 0.3s;
 }
 
-.btn--choices__option:hover {
+.btn--choices__option:hover:enabled {
   transform: translateY(-7px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
-.btn--choices__option:active {
+.btn--choices__option:active:enabled {
   transform: translateY(-4px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--choices__option:disabled {
+  opacity: 0.3;
 }
 
 @media (min-width: 650px) {
