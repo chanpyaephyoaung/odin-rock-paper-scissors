@@ -223,13 +223,19 @@ class App {
     roundDecisionText.classList.remove("hide");
     if (!winner) {
       roundDecisionWinnerText.textContent = "Draw!";
+      roundDecisionWinnerChoiceText.style.color = "var(--color-white)";
+      roundDecisionLoserChoiceText.style.color = "var(--color-white)";
       roundDecisionVerbText.textContent = "🤝";
     } else if (winner === "computer") {
       roundDecisionWinnerText.style.color = "var(--color-secondary)";
+      roundDecisionWinnerChoiceText.style.color = "var(--color-secondary)";
+      roundDecisionLoserChoiceText.style.color = "var(--color-primary)";
       roundDecisionWinnerText.textContent = "You lose!";
       roundDecisionVerbText.textContent = "beats";
     } else if (winner === "player") {
       roundDecisionWinnerText.style.color = "var(--color-primary)";
+      roundDecisionWinnerChoiceText.style.color = "var(--color-primary)";
+      roundDecisionLoserChoiceText.style.color = "var(--color-secondary)";
       roundDecisionWinnerText.textContent = "You win!";
       roundDecisionVerbText.textContent = "beats";
     }
@@ -237,7 +243,7 @@ class App {
     roundDecisionLoserChoiceText.textContent = this._capitalizeWord(loseChoice);
   }
 
-  // Decide winner based on choices
+  // Decide winner of the round based on choices
   _decideRoundWinner() {
     setTimeout(() => {
       const computerChoice = this.choices.find(
