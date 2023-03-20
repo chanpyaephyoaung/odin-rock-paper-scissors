@@ -220,22 +220,35 @@ class App {
 
   // Update the decision text after each round
   _updateWinner(winner, winChoice, loseChoice) {
+    const coloriseRoundDecisionTexts = (
+      winnerTextColor,
+      winnerChoiceTextColor,
+      loserChoiceTextColor
+    ) => {
+      roundDecisionWinnerText.style.color = winnerTextColor;
+      roundDecisionWinnerChoiceText.style.color = winnerChoiceTextColor;
+      roundDecisionLoserChoiceText.style.color = loserChoiceTextColor;
+    };
+
     roundDecisionText.classList.remove("hide");
     if (!winner) {
+      coloriseRoundDecisionTexts("var(--color-white)", "var(--color-white)", "var(--color-white)");
       roundDecisionWinnerText.textContent = "Draw!";
-      roundDecisionWinnerChoiceText.style.color = "var(--color-white)";
-      roundDecisionLoserChoiceText.style.color = "var(--color-white)";
       roundDecisionVerbText.textContent = "🤝";
     } else if (winner === "computer") {
-      roundDecisionWinnerText.style.color = "var(--color-secondary)";
-      roundDecisionWinnerChoiceText.style.color = "var(--color-secondary)";
-      roundDecisionLoserChoiceText.style.color = "var(--color-primary)";
+      coloriseRoundDecisionTexts(
+        "var(--color-secondary)",
+        "var(--color-secondary)",
+        "var(--color-primary)"
+      );
       roundDecisionWinnerText.textContent = "You lose!";
       roundDecisionVerbText.textContent = "beats";
     } else if (winner === "player") {
-      roundDecisionWinnerText.style.color = "var(--color-primary)";
-      roundDecisionWinnerChoiceText.style.color = "var(--color-primary)";
-      roundDecisionLoserChoiceText.style.color = "var(--color-secondary)";
+      coloriseRoundDecisionTexts(
+        "var(--color-primary)",
+        "var(--color-primary)",
+        "var(--color-secondary)"
+      );
       roundDecisionWinnerText.textContent = "You win!";
       roundDecisionVerbText.textContent = "beats";
     }
@@ -286,6 +299,7 @@ class App {
       gameWinnerText.style.color = "var(--color-secondary)";
     } else {
       gameWinnerText.textContent = "This game is draw!";
+      gameWinnerText.style.color = "var(--color-white)";
     }
   }
 
