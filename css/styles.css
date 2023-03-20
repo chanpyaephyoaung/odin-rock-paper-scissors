@@ -25,6 +25,7 @@ body {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
+  background-color: #1b1b1b;
   background-image: url("../img/bg-small.jpg");
   background-position: center;
   background-size: cover;
@@ -33,6 +34,12 @@ body {
 @media (min-width: 650px) {
   :root {
     --main-body-padding: 3.5rem;
+  }
+}
+
+@media (max-width: 300px) {
+  html {
+    font-size: 50%;
   }
 }
 

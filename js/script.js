@@ -88,6 +88,7 @@ class App {
   // States
   hasRoundInputError = false;
   isWeaponChosen = false;
+  isNewGame = false;
   constructor() {
     formRound.addEventListener("submit", this._startGame.bind(this));
     choicesWrapper.addEventListener("click", this._playRound.bind(this));
@@ -150,6 +151,13 @@ class App {
     this._zoomOut(sectionStart, 400, formRoundControls, btnStart);
     this._showElements(gameContainer, sectionJudgeInGame);
 
+    if (this.isNewGame) {
+      this._showElements(choicesWrapper, roundText);
+      // Enable the choices buttons again
+      this.isWeaponChosen = false;
+      btnChoices.forEach(btn => (btn.disabled = false));
+    }
+
     playerChoiceImg.style.animation = "playerChoiceStart 0.2s 0.4s ease-in";
     computerChoiceImg.style.animation = "computerChoiceStart 0.2s 0.4s ease-in";
 
@@ -190,7 +198,6 @@ class App {
       this.isWeaponChosen = true;
       // Disable weapon buttons
       btnChoices.forEach(btn => (btn.disabled = true));
-      console.log(chosenWeapon);
       return chosenWeapon.dataset.choice;
     }
   }
@@ -236,7 +243,6 @@ class App {
       const computerChoice = this.choices.find(
         choice => choice.name === this.computer.currentChoice
       );
-      console.log(computerChoice);
       if (this.player.currentChoice === computerChoice.winChoice) {
         this.computer.score++;
         this._updateWinner(
@@ -244,8 +250,6 @@ class App {
           this.computer.currentChoice,
           this.player.currentChoice
         );
-        console.log(this.computer.type, this.computer.currentChoice, this.player.currentChoice);
-        console.log("computer wins!");
       }
       if (this.player.currentChoice === computerChoice.loseChoice) {
         this.player.score++;
@@ -254,19 +258,68 @@ class App {
           this.player.currentChoice,
           this.computer.currentChoice
         );
-        console.log(this.player.type, this.player.currentChoice, this.computer.currentChoice);
-        console.log("player wins");
       }
       if (this.player.currentChoice === computerChoice.name) {
         this.player.drawAmount++;
         this.computer.drawAmount++;
         this._updateWinner(null, this.computer.currentChoice, this.player.currentChoice);
-        console.log("draw!");
       }
       this._updateScores();
     }, 2000);
   }
 
+  // Decide the winner of the game based on the scores
+  _decideGameWinner() {
+    this._hideElements(roundDecisionText, roundText, choicesWrapper);
+    sectionJudgeFinal.classList.remove("hide");
+    if (this.player.score > this.computer.score) {
+      gameWinnerText.textContent = "You won this game!";
+      gameWinnerText.style.color = "var(--color-primary)";
+    } else if (this.computer.score > this.player.score) {
+      gameWinnerText.textContent = "You lost this game!";
+      gameWinnerText.style.color = "var(--color-secondary)";
+    } else {
+      gameWinnerText.textContent = "This game is draw!";
+    }
+  }
+
+  // Reset Scores
+  _resetScores() {
+    this.computer.score = 0;
+    this.computer.drawAmount = 0;
+    this.computer.currentChoice = "";
+    this.player.score = 0;
+    this.player.drawAmount = 0;
+    this.player.currentChoice = "";
+    this.roundAmount.currentRound = 1;
+    this.roundAmount.totalRound = 0;
+
+    computerScoreAmountText.textContent = 0;
+    computerDrawAmountText.textContent = 0;
+    playerScoreAmountText.textContent = 0;
+    playerDrawAmountText.textContent = 0;
+    currentRoundText.textContent = 1;
+  }
+
+  // Reset game
+  _resetGame() {
+    computerChoiceImg.style.animation = "computerChoiceEnd 0.2s 0.4s ease-out forwards";
+    playerChoiceImg.style.animation = "playerChoiceEnd 0.2s 0.4s ease-out forwards";
+    sectionJudgeFinal.style.animation = "zoomOut 0.5s ease-out forwards";
+    setTimeout(() => {
+      this._hideElements(sectionJudgeFinal, gameContainer);
+      sectionJudgeFinal.style.animation = "";
+      this._zoomIn(sectionStart, formRoundControls, btnStart);
+      // Change choices back to default rock for initiation animation
+      this._changeWeapon("rock", computerChoiceImg, 0);
+      this._changeWeapon("rock", playerChoiceImg, 0);
+      // Reset Scores
+      this._resetScores();
+      this.isNewGame = true;
+    }, 800);
+  }
+
+  // Reset a round
   _resetRound() {
     if (this.roundAmount.currentRound < this.roundAmount.totalRound) {
       setTimeout(() => {
@@ -281,6 +334,10 @@ class App {
         computerChoiceImg.style.animation = "";
         playerChoiceImg.style.animation = "";
       }, 4000);
+    } else {
+      setTimeout(() => {
+        this._decideGameWinner();
+      }, 5000);
     }
   }
 
@@ -298,8 +355,6 @@ class App {
     this.computer.currentChoice = this._getComputerChoice();
     this._changeWeapon(this.computer.currentChoice, computerChoiceImg, 1600);
 
-    console.log(this.computer, this.player);
-    // console.log(this.player);
     this._decideRoundWinner();
     this._resetRound();
   }
