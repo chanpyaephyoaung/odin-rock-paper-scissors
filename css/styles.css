@@ -17,13 +17,14 @@
 
 html {
   font-size: 62.5%;
+  height: 100%;
 }
 
 body {
   font-family: "Caveat", cursive;
   line-height: 1.4;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   overflow: hidden;
   background-color: #1b1b1b;
   background-image: url("../img/bg-small.jpg");
@@ -72,7 +73,7 @@ main,
 }
 
 .main {
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -170,14 +171,10 @@ main,
 
 .section--start {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
-
-/* .section--start > * {
-  animation: zoomIn 0.3s ease-in;
-} */
 
 @media (min-width: 900px) {
   .section--start {
@@ -261,10 +258,6 @@ main,
 }
 
 /* Section -- Computer Choice */
-
-.section--computer {
-  /* animation: slideOutUp 0.2s ease-out; */
-}
 
 .computer__choice__img {
   margin: 0 auto;
