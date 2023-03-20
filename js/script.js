@@ -89,6 +89,7 @@ class App {
   hasRoundInputError = false;
   isWeaponChosen = false;
   isNewGame = false;
+
   constructor() {
     formRound.addEventListener("submit", this._startGame.bind(this));
     choicesWrapper.addEventListener("click", this._playRound.bind(this));
@@ -112,11 +113,13 @@ class App {
 
   // Hide Elements
   _hideElements(...els) {
+    if (!els) return;
     els.forEach(el => el.classList.add("hide"));
   }
 
   // Show Elements
   _showElements(...els) {
+    if (!els) return;
     els.forEach(el => el.classList.remove("hide"));
   }
 
@@ -167,6 +170,7 @@ class App {
 
   // Zoom out animation for the list of elements
   _zoomOut(tohideContainer, hideTime, ...elArr) {
+    if (!elArr) return;
     elArr.forEach(el => (el.style.animation = "zoomOut 0.3s ease-in forwards"));
     setTimeout(() => {
       tohideContainer.classList.add("hide");
@@ -176,6 +180,7 @@ class App {
 
   // Zoom In animation for the list of elements
   _zoomIn(toshowContainer, ...elArr) {
+    if (!elArr) return;
     toshowContainer.classList.remove("hide");
     elArr.forEach(el => (el.style.animation = "zoomIn 0.3s ease-in forwards"));
   }
@@ -218,7 +223,7 @@ class App {
     playerDrawAmountText.textContent = this.player.drawAmount;
   }
 
-  // Update the decision text after each round
+  // Update the decision texts after each round
   _updateWinner(winner, winChoice, loseChoice) {
     const coloriseRoundDecisionTexts = (
       winnerTextColor,
